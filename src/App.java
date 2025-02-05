@@ -6,6 +6,8 @@ public class App {
 
     private static Integer numeroParejas;
     private static ArrayList<Character> baraja = new ArrayList<>();
+    private static Integer primeraCarta;
+    private static Integer segundaCarta;
 
     public static void main(String[] args) throws Exception {
         numeroParejas = Integer.parseInt(cuantasParejas());
@@ -65,32 +67,9 @@ public class App {
      * @throws Exception
      */
     public static void eligeCartas() throws Exception {
-
-        /** Seleccionamos la primera carta */
-        System.out.println("Elige una carta:");
-        for (int i = 0; i < baraja.size(); i++) {
-            if(baraja.get(i) == 'X') { 
-                System.out.print("[X] "); 
-            } else {
-                System.out.print("[" + i + "] ");
-            }
-        }
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        int primeraCarta = Integer.parseInt(r.readLine());
-
-        /** Seleccionamos la segunda carta */
-        System.out.println("Elige otra carta:");
-        for (int i = 0; i < baraja.size(); i++) {
-            if(i == primeraCarta) { 
-                System.out.print("[Seleccionada] "); 
-            } else if(baraja.get(i) == 'X') { 
-                System.out.print("[X] "); 
-            } else {
-                System.out.print("[" + i + "] ");
-            }
-        }
-        BufferedReader r2 = new BufferedReader(new InputStreamReader(System.in));
-        int segundaCarta = Integer.parseInt(r2.readLine());
+        // Enviamos size + 1 como si fuese "no se ha elegido carta"
+        primeraCarta = preguntaCarta(baraja.size() + 1);
+        segundaCarta = preguntaCarta(primeraCarta);
 
         /** Revisamos lo que se ha elegido */
         if(baraja.get(primeraCarta) == baraja.get(segundaCarta)) {
@@ -115,4 +94,46 @@ public class App {
 
         eligeCartas();
     }
+
+    public static void mostrarBaraja(int carta) {
+        for (int i = 0; i < baraja.size(); i++) {
+            if(i == carta) {
+                System.out.print("[Seleccionada] "); 
+            } else if(baraja.get(i) == 'X') { 
+                System.out.print("[X] "); 
+            } else {
+                System.out.print("[" + i + "] ");
+            }
+        }
+    }
+
+    public static Integer preguntaCarta(int cartaElegida) throws Exception {
+        System.out.println("Elige una carta:");
+        mostrarBaraja(cartaElegida);
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        int carta = Integer.parseInt(r.readLine());
+
+        if (carta < 0) {
+            System.out.println("El número de carta no puede ser negativo:");
+            return preguntaCarta(cartaElegida);
+        }
+
+        if(carta >= baraja.size()) {
+            System.out.println("No existe esa carta:");
+            return preguntaCarta(cartaElegida);
+        }
+
+        if(baraja.get(carta) == 'X') {
+            System.out.println("Esa carta ya se ha levantado:");
+            return preguntaCarta(cartaElegida);
+        }
+
+        if(cartaElegida == carta) {
+            System.out.println("Ya has elegido esa carta, elige otra:");
+            return preguntaCarta(cartaElegida);
+        }
+
+        return carta;
+    }
+
 }
