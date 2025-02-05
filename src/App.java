@@ -10,10 +10,16 @@ public class App {
     private static Integer segundaCarta;
 
     public static void main(String[] args) throws Exception {
-        numeroParejas = Integer.parseInt(cuantasParejas());
-        generarBaraja();
-        barajar();
-        eligeCartas();
+        App game = new App();
+
+        /** Preguntamos al usuario cuántas parejas se tienen que generar en la baraja */
+        game.cuantasParejas();
+
+        /** Preparamos la baraja */
+        game.prepararBaraja();
+
+        /** Comenzamos con el juego */
+        game.eligeCartas();
     }
 
     /**
@@ -22,10 +28,10 @@ public class App {
      * @return
      * @throws Exception
      */
-    public static String cuantasParejas() throws Exception {
+    public void cuantasParejas() throws Exception {
         System.out.println("Introduce el número de parejas");
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        return r.readLine();
+        numeroParejas = Integer.parseInt(r.readLine());
     }
 
     /**
@@ -33,12 +39,13 @@ public class App {
      * 
      * @throws Exception
      */
-    public static void generarBaraja() throws Exception {
+    public void prepararBaraja() throws Exception {
         int i = 0;
         while (i < numeroParejas * 2) {
             baraja.add((char)('A' + i / 2));
             i++;
         }
+        barajar();
     }
 
     /**
@@ -48,7 +55,7 @@ public class App {
      * Se podría hacer algún sort random raro, pero no nos vamos a comer la cabeza.
      * @throws Exception
      */
-    public static void barajar() throws Exception {
+    public void barajar() throws Exception {
         int length = baraja.size();
         int j = 0;
         // Barajamos dos veces por los jajas
@@ -66,7 +73,7 @@ public class App {
      * 
      * @throws Exception
      */
-    public static void eligeCartas() throws Exception {
+    public void eligeCartas() throws Exception {
         // Enviamos size + 1 como si fuese "no se ha elegido carta"
         primeraCarta = preguntaCarta(baraja.size() + 1);
         segundaCarta = preguntaCarta(primeraCarta);
@@ -100,7 +107,7 @@ public class App {
      * 
      * @param carta
      */
-    public static void mostrarBaraja(int carta) {
+    public void mostrarBaraja(int carta) {
         for (int i = 0; i < baraja.size(); i++) {
             if(i == carta) {
                 System.out.print("[Seleccionada] "); 
@@ -125,7 +132,7 @@ public class App {
      * @return
      * @throws Exception
      */
-    public static Integer preguntaCarta(int cartaElegida) throws Exception {
+    public Integer preguntaCarta(int cartaElegida) throws Exception {
         System.out.println("Elige una carta:");
         mostrarBaraja(cartaElegida);
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
