@@ -95,6 +95,11 @@ public class App {
         eligeCartas();
     }
 
+    /**
+     * Imprimimos la baraja mostrando las cartas seleccionadas y levantadas.
+     * 
+     * @param carta
+     */
     public static void mostrarBaraja(int carta) {
         for (int i = 0; i < baraja.size(); i++) {
             if(i == carta) {
@@ -107,6 +112,19 @@ public class App {
         }
     }
 
+    /**
+     * Preguntamos por la carta a seleccionar.
+     * Comprobamos que la carta seleccionada es una carta válida.
+     * - Tiene que ser un número positivo.
+     * - Tiene que existir
+     * - Tiene que estar dada la vuelta (no seleccionada)
+     * 
+     * Si la validación falla, preguntamos de nuevo llamando de nuevo preguntaCarta()
+     *  
+     * @param cartaElegida
+     * @return
+     * @throws Exception
+     */
     public static Integer preguntaCarta(int cartaElegida) throws Exception {
         System.out.println("Elige una carta:");
         mostrarBaraja(cartaElegida);
