@@ -110,7 +110,7 @@ public class App {
     public void mostrarBaraja(int carta) {
         for (int i = 0; i < baraja.size(); i++) {
             if(i == carta) {
-                System.out.print("[Seleccionada] "); 
+                System.out.print("[" + baraja.get(i) + "] "); 
             } else if(baraja.get(i) == 'X') { 
                 System.out.print("[X] "); 
             } else {
@@ -158,6 +158,7 @@ public class App {
             return preguntaCarta(cartaElegida);
         }
 
+        System.out.println("Has levantado la carta: " + baraja.get(carta) + " en la posición " + carta);
         return carta;
     }
 
