@@ -1,0 +1,45 @@
+# Compiled class files
+*.class
+
+# Build directories
+target/
+bin/
+build/
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+
+# IDE specific files
+.settings/
+.classpath
+.project
+.idea/
+*.iml
+.vscode/
+
+# Logs
+*.log
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+.gradle/
+build/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
