@@ -133,32 +133,34 @@ public class App {
      * @throws Exception
      */
     public Integer preguntaCarta(int cartaElegida) throws Exception {
-        System.out.println("Elige una carta:");
+
+        System.out.println("\n");
         mostrarBaraja(cartaElegida);
+        System.out.println("\nElige una carta:");
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         int carta = Integer.parseInt(r.readLine());
 
         if (carta < 0) {
-            System.out.println("El número de carta no puede ser negativo:");
+            System.out.println("El número de carta no puede ser negativo");
             return preguntaCarta(cartaElegida);
         }
 
         if(carta >= baraja.size()) {
-            System.out.println("No existe esa carta:");
+            System.out.println("No existe esa carta");
             return preguntaCarta(cartaElegida);
         }
 
         if(baraja.get(carta) == 'X') {
-            System.out.println("Esa carta ya se ha levantado:");
+            System.out.println("Esa carta ya se ha levantado");
             return preguntaCarta(cartaElegida);
         }
 
         if(cartaElegida == carta) {
-            System.out.println("Ya has elegido esa carta, elige otra:");
+            System.out.println("Ya has elegido esa carta, elige otra");
             return preguntaCarta(cartaElegida);
         }
 
-        System.out.println("Has levantado la carta: " + baraja.get(carta) + " en la posición " + carta);
+        System.out.println("\nHas levantado la carta " + baraja.get(carta) + " en la posición " + carta);
         return carta;
     }
 
