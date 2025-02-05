@@ -129,7 +129,7 @@ public class App {
      * Si la validación falla, preguntamos de nuevo llamando de nuevo preguntaCarta()
      *  
      * @param cartaElegida
-     * @return
+     * @return Integer
      * @throws Exception
      */
     public Integer preguntaCarta(int cartaElegida) throws Exception {
