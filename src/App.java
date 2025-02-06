@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class App {
 
+    private static Integer dimension;
+    private static Character[][] tablero;
     private static Integer numeroParejas;
     private static ArrayList<Character> baraja = new ArrayList<>();
     private static Integer primeraCarta;
@@ -46,6 +48,22 @@ public class App {
             i++;
         }
         barajar();
+        poblarTablero();
+    }
+
+    public void poblarTablero() throws Exception {
+        dimension = numeroParejas;
+        tablero = new Character[numeroParejas][4];
+        Integer counter = 0;
+        
+        for(int x = 0; x < dimension; x++) {
+            for(int y = 0; y < 4; y++) {
+                if(counter < baraja.size()) {
+                    tablero[x][y] = baraja.get(counter);
+                    counter++;
+                }
+            }
+        }
     }
 
     /**
@@ -103,19 +121,31 @@ public class App {
     }
 
     /**
-     * Imprimimos la baraja mostrando las cartas seleccionadas y levantadas.
+     * Imprimimos la baraja en un tablero de 4xN
+     * 
+     * [] [] [] []
+     * [] [] [] []
+     * [] [] [] []
+     * ...
      * 
      * @param carta
      */
-    public void mostrarBaraja(int carta) {
-        for (int i = 0; i < baraja.size(); i++) {
-            if(i == carta) {
-                System.out.print("[" + baraja.get(i) + "] "); 
-            } else if(baraja.get(i) == 'X') { 
-                System.out.print("[X] "); 
-            } else {
-                System.out.print("[" + i + "] ");
+    public void mostrarTablero(int carta) {
+        Integer counter = 0;
+        for(int i = 0; i < dimension; i++) {
+            for(int j = 0; j < 4; j++) {
+                if(counter < baraja.size()) {
+                    if(counter == carta) {
+                        System.out.print("[" + baraja.get(counter) + "] "); 
+                    } else if (baraja.get(counter) == 'X') {
+                        System.out.print("[X] ");
+                    } else {
+                        System.out.print("[" + counter + "] ");
+                    }
+                    counter++;
+                }
             }
+            System.out.println();
         }
     }
 
@@ -135,7 +165,7 @@ public class App {
     public Integer preguntaCarta(int cartaElegida) throws Exception {
 
         System.out.println("\n");
-        mostrarBaraja(cartaElegida);
+        mostrarTablero(cartaElegida);
         System.out.println("\nElige una carta:");
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         int carta = Integer.parseInt(r.readLine());
