@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class App {
 
-    private static Integer dimension;
+    private static Integer numeroFilas;
+    private static Integer numeroColumnas;
     private static Character[][] tablero;
     private static Integer numeroParejas;
     private static ArrayList<Character> baraja = new ArrayList<>();
@@ -52,12 +53,19 @@ public class App {
     }
 
     public void poblarTablero() throws Exception {
-        dimension = numeroParejas;
-        tablero = new Character[numeroParejas][4];
+
+        /** 
+         * Asumamos un número de columnas de 4 
+         * En ese caso el número de filas tendrá que ser el tamaño de la baraja entre las columnas más 1 por si el número de parejas es impar.
+        */
+        numeroColumnas = 4;
+        numeroFilas = (baraja.size() / numeroColumnas) + 1;
+
+        tablero = new Character[numeroFilas][numeroColumnas];
         Integer counter = 0;
         
-        for(int x = 0; x < dimension; x++) {
-            for(int y = 0; y < 4; y++) {
+        for(int x = 0; x < numeroFilas; x++) {
+            for(int y = 0; y < numeroColumnas; y++) {
                 if(counter < baraja.size()) {
                     tablero[x][y] = baraja.get(counter);
                     counter++;
@@ -123,17 +131,12 @@ public class App {
     /**
      * Imprimimos la baraja en un tablero de 4xN
      * 
-     * [] [] [] []
-     * [] [] [] []
-     * [] [] [] []
-     * ...
-     * 
      * @param carta
      */
     public void mostrarTablero(int carta) {
         Integer counter = 0;
-        for(int i = 0; i < dimension; i++) {
-            for(int j = 0; j < 4; j++) {
+        for(int i = 0; i < numeroFilas; i++) {
+            for(int j = 0; j < numeroColumnas; j++) {
                 if(counter < baraja.size()) {
                     if(counter == carta) {
                         System.out.print("[" + baraja.get(counter) + "] "); 
